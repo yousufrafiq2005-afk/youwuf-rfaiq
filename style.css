@@ -963,14 +963,40 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Breakpoints
+   Responsive Breakpoints — Mobile First
    -------------------------------------------------------------------------- */
+
+/* Tablet (max 1024px) */
+@media (max-width: 1024px) {
+  .story-card {
+    max-width: 400px;
+  }
+
+  .card-heading {
+    font-size: 1.6rem;
+  }
+
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile Large (max 860px) */
 @media (max-width: 860px) {
   .header {
     padding: 0 1rem;
+    height: 58px;
   }
-  
+
   .nav-center {
+    display: none;
+  }
+
+  .nav-right .btn-pill.btn-ghost {
     display: none;
   }
 
@@ -978,15 +1004,29 @@ body {
   .story-card.right-aligned {
     left: 4vw !important;
     right: 4vw !important;
+    width: 92vw !important;
     max-width: 100%;
   }
 
   .card-glass {
-    padding: 1.5rem;
+    padding: 1.4rem 1.5rem;
   }
 
   .card-heading {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
+  }
+
+  .card-copy {
+    font-size: 0.88rem;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .stat-num {
+    font-size: 1rem;
   }
 
   .hud-controller {
@@ -994,7 +1034,16 @@ body {
     bottom: 16px;
   }
 
+  .hud-container {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
   .speed-selector {
+    display: none;
+  }
+
+  .hud-meta {
     display: none;
   }
 
@@ -1002,4 +1051,186 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .specs-section {
+    padding: 4rem 1.2rem 3.5rem;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
 }
+
+/* Mobile Small (max 540px) */
+@media (max-width: 540px) {
+  .header {
+    height: 54px;
+    padding: 0 0.9rem;
+  }
+
+  .brand-version {
+    display: none;
+  }
+
+  .nav-pill.badge-fifa {
+    display: none;
+  }
+
+  .btn-icon #soundLabel {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 0.4rem;
+  }
+
+  .btn-pill {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .story-card,
+  .story-card.right-aligned {
+    left: 3vw !important;
+    right: 3vw !important;
+    width: 94vw !important;
+    bottom: 90px;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  .story-card.active-card {
+    transform: none !important;
+  }
+
+  .card-glass {
+    padding: 1.1rem 1.2rem;
+    border-radius: 14px;
+  }
+
+  .card-heading {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-copy {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .badge-row {
+    gap: 5px;
+    margin-bottom: 0.8rem;
+  }
+
+  .tag {
+    font-size: 0.62rem;
+    padding: 3px 7px;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    padding-top: 0.9rem;
+  }
+
+  .stat-num {
+    font-size: 0.9rem;
+  }
+
+  .stat-desc {
+    font-size: 0.65rem;
+  }
+
+  .hud-controller {
+    width: 96%;
+    bottom: 12px;
+  }
+
+  .hud-btn-primary {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hud-btn-ghost {
+    width: 28px;
+    height: 28px;
+  }
+
+  .specs-section {
+    padding: 3rem 1rem 2.5rem;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .spec-card {
+    padding: 1.4rem;
+    border-radius: 12px;
+  }
+
+  .shortcuts-card {
+    padding: 1.2rem 1.4rem;
+    border-radius: 12px;
+  }
+
+  .shortcut-pills {
+    gap: 7px;
+  }
+
+  .key-pill {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .scroll-cue {
+    bottom: 78px;
+    font-size: 0.62rem;
+  }
+
+  .loader-title {
+    font-size: 2rem;
+  }
+
+  .loader-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small phones (max 380px) */
+@media (max-width: 380px) {
+  .card-heading {
+    font-size: 1rem;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-num {
+    font-size: 0.85rem;
+  }
+}
+
