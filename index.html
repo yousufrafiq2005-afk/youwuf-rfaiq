@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEROPRO 24 // FIFA Match Ball Interactive Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Preloader Screen -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-content">
+      <div class="loader-badge">PRECISION ENGINEERING</div>
+      <h1 class="loader-title">AEROPRO 24</h1>
+      <p class="loader-subtitle">Loading 240 Ultra-HD 3D Motion Frames</p>
+      
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div id="progressBar" class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-meta">
+          <span id="progressPercent" class="progress-percent">0%</span>
+          <span id="progressCount" class="progress-count">0 / 240 frames</span>
+        </div>
+      </div>
+
+      <div class="loader-hint">
+        <span class="pulse-dot"></span>
+        Scroll or drag to rotate in full 360° space
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="nav-left">
+      <div class="brand-logo">
+        <span class="brand-mark">●</span>
+        <span class="brand-name">AEROPRO</span>
+        <span class="brand-version">PRO-24</span>
+      </div>
+      <div class="nav-divider"></div>
+      <span class="nav-pill badge-fifa">FIFA QUALITY PRO</span>
+    </div>
+
+    <div class="nav-center">
+      <div class="timeline-indicator">
+        <span class="timeline-label">SEQUENCE</span>
+        <span id="navFrameCount" class="timeline-val">001 / 240</span>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button id="soundToggle" class="btn-icon" title="Toggle Aerodynamic Audio">
+        <svg id="soundIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <span id="soundLabel">Sound Off</span>
+      </button>
+      <button id="autoPlayNavBtn" class="btn-pill">
+        <span class="play-icon">▶</span>
+        <span>Auto Spin</span>
+      </button>
+      <a href="#specs" class="btn-pill btn-ghost">Specifications</a>
+    </div>
+  </header>
+
+  <!-- Sticky Canvas Viewport -->
+  <div class="viewport-pin">
+    <canvas id="animationCanvas"></canvas>
+    <div class="canvas-vignette"></div>
+    <div class="canvas-grid-overlay"></div>
+
+    <!-- Dynamic Story Milestone Cards (Activated via Scroll / Frame Position) -->
+    <div class="narrative-layer">
+      <!-- Milestone 1 -->
+      <section id="beat1" class="story-card active-card" data-start="0" data-end="60">
+        <div class="card-glass">
+          <div class="badge-row">
+            <span class="tag tag-accent">01 // AERODYNAMICS</span>
+            <span class="tag">MACRO TEXTURE</span>
+          </div>
+          <h2 class="card-heading">Engineered for Flawless Trajectory</h2>
+          <p class="card-copy">
+            Featuring 3D micro-textured polyurethane surface grooves that channel turbulence, delivering unmatched ball stability, zero knuckling drift, and laser-accurate flight paths.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-num">0.42</span>
+              <span class="stat-desc">Drag Coefficient</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">12-Panel</span>
+              <span class="stat-desc">Thermal Bond</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">100%</span>
+              <span class="stat-desc">Spherical Balance</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Milestone 2 -->
+      <section id="beat2" class="story-card" data-start="65" data-end="135">
+        <div class="card-glass right-aligned">
+          <div class="badge-row">
+            <span class="tag tag-accent">02 // GYROSCOPIC SPIN</span>
+            <span class="tag">ZERO GRAVITY</span>
+          </div>
+          <h2 class="card-heading">Harmonic Weight Distribution</h2>
+          <p class="card-copy">
+            Seamless thermo-bonding architecture eliminates stitching seams completely. Zero water absorption in monsoon conditions guarantees consistent match weight throughout 120 minutes.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-num">0.0%</span>
+              <span class="stat-desc">Water Ingress</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">435g</span>
+              <span class="stat-desc">Match Weight</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">0.8 Bar</span>
+              <span class="stat-desc">Pressure Spec</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Milestone 3 -->
+      <section id="beat3" class="story-card" data-start="140" data-end="190">
+        <div class="card-glass">
+          <div class="badge-row">
+            <span class="tag tag-accent">03 // KINETIC DYNAMICS</span>
+            <span class="tag">HIGH VELOCITY</span>
+          </div>
+          <h2 class="card-heading">Dynamic Nitrogen Bladder</h2>
+          <p class="card-copy">
+            Multi-density microcellular elastomer foam core stores and releases kinetic energy instantaneously upon boot strike, translating foot torque directly into blistering exit speed.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-num">1.48m</span>
+              <span class="stat-desc">True Rebound</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">130+</span>
+              <span class="stat-desc">km/h Velocity Rating</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">N₂</span>
+              <span class="stat-desc">Gas Sealed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Milestone 4 -->
+      <section id="beat4" class="story-card" data-start="195" data-end="240">
+        <div class="card-glass right-aligned">
+          <div class="badge-row">
+            <span class="tag tag-accent">04 // GROUND REFLECTION</span>
+            <span class="tag">TOUCHDOWN PRECISION</span>
+          </div>
+          <h2 class="card-heading">Obsidian Surface Acoustic Touch</h2>
+          <p class="card-copy">
+            Treated with an all-conditions micro-tack finish that gives outfielders fingertip-level ball control and goalkeepers maximum tactile grip in driving rain or humid summer nights.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-num">PRO</span>
+              <span class="stat-desc">FIFA Certified</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">360°</span>
+              <span class="stat-desc">Visual Tracking</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">4K</span>
+              <span class="stat-desc">Rendered Asset</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Subtle Scroll Cue -->
+    <div id="scrollCue" class="scroll-cue">
+      <div class="mouse-icon">
+        <div class="mouse-wheel"></div>
+      </div>
+      <span>SCROLL DOWN TO ROTATE</span>
+    </div>
+  </div>
+
+  <!-- Scroll Height Spacer (Drives the scroll progress) -->
+  <div id="scrollSpacer" class="scroll-spacer"></div>
+
+  <!-- Floating HUD / Media Scrubber Bar -->
+  <div class="hud-controller">
+    <div class="hud-container">
+      <!-- Play / Pause -->
+      <button id="playBtn" class="hud-btn-primary" aria-label="Play / Pause Animation">
+        <svg id="playIconSvg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <polygon points="6 4 20 12 6 20 6 4"></polygon>
+        </svg>
+      </button>
+
+      <!-- Frame Step Back -->
+      <button id="prevFrameBtn" class="hud-btn-ghost" title="Previous Frame (Left Arrow)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Scrubber Track & Range Input -->
+      <div class="scrubber-wrapper">
+        <div class="scrubber-track-bar">
+          <div id="scrubProgress" class="scrubber-progress-fill"></div>
+        </div>
+        <input 
+          type="range" 
+          id="frameSlider" 
+          min="0" 
+          max="239" 
+          value="0" 
+          step="1" 
+          class="scrub-range" 
+          aria-label="Frame scrub position"
+        />
+      </div>
+
+      <!-- Frame Step Next -->
+      <button id="nextFrameBtn" class="hud-btn-ghost" title="Next Frame (Right Arrow)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Frame Info Pill -->
+      <div class="hud-meta">
+        <span class="meta-label">FRAME</span>
+        <span id="currentFrameDisplay" class="meta-value">001</span>
+        <span class="meta-divider">/</span>
+        <span class="meta-total">240</span>
+      </div>
+
+      <!-- Speed Selector -->
+      <div class="speed-selector">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="1.5">1.5x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+      </div>
+
+      <!-- Reset / Top -->
+      <button id="resetBtn" class="hud-btn-ghost" title="Restart to Frame 1">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Detailed Specifications Section (Scrolled to after animation or via nav) -->
+  <section id="specs" class="specs-section">
+    <div class="specs-container">
+      <div class="section-header">
+        <span class="tag tag-accent">TECHNICAL DOSSIER</span>
+        <h2 class="section-title">AEROPRO-24 Official Specifications</h2>
+        <p class="section-subtitle">Laboratory tested and FIFA Quality Pro certified for international elite competitions.</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-card">
+          <div class="spec-icon">⚽</div>
+          <h3>Outer Shell Architecture</h3>
+          <p>Multi-layered 1.2mm Japanese microfibre polyurethane with diamond aerodynamic indentations for drag minimization.</p>
+          <div class="spec-meta-list">
+            <div><span>Panels:</span><strong>12 Thermal-Bonded</strong></div>
+            <div><span>Texture:</span><strong>Vortex Aerogrooves</strong></div>
+            <div><span>Seams:</span><strong>Zero-Thread Thermal</strong></div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">⚡</div>
+          <h3>Cushioning & Core</h3>
+          <p>POE (Polyolefin Elastomer) responsive foam layer backing delivers 45% higher kinetic restitution than standard EVA foam.</p>
+          <div class="spec-meta-list">
+            <div><span>Foam:</span><strong>Elastomer Microcellular</strong></div>
+            <div><span>Bladder:</span><strong>Synthetic Rubber + N₂</strong></div>
+            <div><span>Circumference:</span><strong>68.5 – 69.5 cm</strong></div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">💧</div>
+          <h3>Environmental Resilience</h3>
+          <p>Hermetically sealed barrier prevents liquid absorption even under prolonged water immersion tests.</p>
+          <div class="spec-meta-list">
+            <div><span>Water Retention:</span><strong>&lt; 0.2% by weight</strong></div>
+            <div><span>Operating Temp:</span><strong>-15°C to +48°C</strong></div>
+            <div><span>Pressure Loss:</span><strong>&lt; 5% after 72 hrs</strong></div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">🏆</div>
+          <h3>FIFA Certification Benchmarks</h3>
+          <p>Surpasses all mandatory standard test parameters established by FIFA Quality Pro laboratory protocol.</p>
+          <div class="spec-meta-list">
+            <div><span>Weight Tolerance:</span><strong>430 ± 5 grams</strong></div>
+            <div><span>Rebound from 2m:</span><strong>142 – 146 cm</strong></div>
+            <div><span>Sphericity Deviation:</span><strong>&lt; 1.2%</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Playground Shortcuts -->
+      <div class="shortcuts-card">
+        <div class="shortcuts-left">
+          <h4>Interactive Keyboard Controls</h4>
+          <div class="shortcut-pills">
+            <span class="key-pill"><kbd>Space</kbd> Play / Pause</span>
+            <span class="key-pill"><kbd>→</kbd> Next Frame</span>
+            <span class="key-pill"><kbd>←</kbd> Prev Frame</span>
+            <span class="key-pill"><kbd>Shift</kbd> + <kbd>→</kbd> Fast Scrub</span>
+            <span class="key-pill"><kbd>Home</kbd> Top</span>
+            <span class="key-pill"><kbd>M</kbd> Mute Audio</span>
+          </div>
+        </div>
+        <div class="shortcuts-right">
+          <button id="backToTopBtn" class="btn-pill btn-glow">Back to 3D Experience ↑</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">AEROPRO 24</span>
+        <span class="footer-tagline">Rendered Frame Interactive Scroll Engine</span>
+      </div>
+      <p class="footer-copy">240-Frame Interactive WebGL / Canvas Showcase &bull; Powered by Antigravity</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
